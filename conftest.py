@@ -21,7 +21,7 @@ def map_test(test):
 
 @pytest.hookimpl(optionalhook=True)
 def pytest_json_modifyreport(json_report):
-    json_report['created'] = format_datetime(json_report['created'])
+    json_report['created'] = format_datetime(json_report['created'])+ ' (UTC)'
     del json_report['root']
     del json_report['collectors']
     del json_report['environment']['Plugins']
@@ -31,6 +31,7 @@ def pytest_json_modifyreport(json_report):
     # Delete the summary from the report
     del json_report['summary']
 
+@pytest.hookimpl(optionalhook=True)
 def pytest_json_runtest_metadata(item, call):
     total_memory, used_memory, free_memory = map(
     int, os.popen('free -t -m').readlines()[-1].split()[1:])
