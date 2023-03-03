@@ -27,7 +27,7 @@
    опубликовать в публичном репозитории на GitHub и прислать ссылку.  
    Полезные ссылки:  
    [blender manual](https://docs.blender.org/manual/en/latest/advanced/command_line/arguments.html)   
-   [blender api](https://docs.blender.org/api/current/info_quickstart.html2)      
+   [blender api](https://docs.blender.org/api/latest/)      
     
     
     
