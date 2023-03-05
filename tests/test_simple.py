@@ -5,7 +5,7 @@ import logging
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from util import creat_solar_system, save_to_file, get_args
+from util import create_solar_system, save_to_file, get_args
 
 def main():
     
@@ -14,7 +14,7 @@ def main():
     log_path = p / 'test_simple.log'
     logging.basicConfig(filename=log_path, encoding='utf-8', level=logging.DEBUG)
     
-    creat_solar_system()
+    create_solar_system()
     if not 'Camera' in bpy.data.objects:
         logging.error(f"Error: no Camera in blender scene")
     

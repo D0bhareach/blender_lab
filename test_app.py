@@ -17,6 +17,7 @@ def args():
 class TestBpy:
     """Test class for blender."""
     BLENDER = "/opt/blender-3.4.1-linux-x64/blender"
+    # create path to tests dir
     path = Path(__file__).parent
     TESTS = path / 'tests'
 
@@ -36,10 +37,21 @@ class TestBpy:
     #         text = True,
     #         )
 
-    def test_two(self, args):
+    # def test_material(self, args):
     #     """Test Blender image with colors"""
 
-        path = self.TESTS / 'test_material.py'
+    #     path = self.TESTS / 'test_material.py'
+    #     subprocess.run(
+    #         f"{self.BLENDER} --background\
+    #         --python {path}\
+    #         -- {args[0].strip()} {args[1].strip()} {args[2].strip()}",
+    #         shell = True,
+    #         text = True,
+    #         )
+
+    def test_light(self, args):
+        """Test Lights settings."""
+        path = self.TESTS / 'test_light.py'
         subprocess.run(
             f"{self.BLENDER} --background\
             --python {path}\
@@ -47,11 +59,3 @@ class TestBpy:
             shell = True,
             text = True,
             )
-
-    # def test_three(self):
-    #     """Test Three"""
-    #     assert 3 == 3
-
-    # def test_print_name(self, args):
-    #     print (f"Displaying name: {args}")
-

@@ -91,11 +91,13 @@ def add_cone(
     )
 
 
-def creat_solar_system():
+def create_solar_system():
     """Create simple solar with only four planets and the Sun."""
 
     _O = bpy.data.objects
-    _O.remove(_O['Cube'], do_unlink=True)
+    c = _O.get('Cube')
+    if c != None:
+        _O.remove(c, do_unlink=True)
     
     add_sphere('Sun', location=[-115.0, 0,  0], subdivisions=6, radius = 100.0)
     add_sphere('Mercury', location=[-14.0, -36.0, -6.], subdivisions=4, radius = 0.40)
