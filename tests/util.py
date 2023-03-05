@@ -2,7 +2,8 @@ import bpy
 import mathutils
 import time
 import os
-from pathlib import PurePath
+import sys
+from pathlib import PurePath, Path
 
 
 # docs: https://docs.blender.org/api/current/bpy.ops.mesh.html#bpy.ops.mesh.primitive_cube_add
@@ -112,16 +113,23 @@ def creat_solar_system():
 
     
 
-def save_to_file(file_name, path = "test_result", width=1024, height=1024):
-    p = PurePath(path)
-    p = p / file_name
-    
+def save_to_file(path, width, height):
+    """Must get path with dir and file_name"""
+
+    file_name = path.stem
     bpy.ops.image.new(name=file_name, width=width, height=height, color=(1.0, 1.0, 1.0, 1.0), alpha=True, generated_type='BLANK', float=False, use_stereo_3d=False, tiled=False)
     image = bpy.data.images[file_name]
     image.alpha_mode = 'STRAIGHT'
     image.file_format = 'PNG'
 
     scene=bpy.context.scene
-    scene.render.filepath = str(p)
+    scene.render.filepath = str(path)
     bpy.ops.render.render(write_still=True)
+
+def get_args():
+    # always receive list of three. Because of default values in main.py
+    argv = sys.argv
+    path, x, y = argv[argv.index('--') + 1:]
+    path = Path(path).resolve()
+    return [path, int(x), int(y)]
 

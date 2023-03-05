@@ -27,8 +27,6 @@ def pytest_json_modifyreport(json_report):
     del json_report['environment']['Plugins']
     del json_report['environment']['Packages']
     json_report['tests'] = list(map(map_test, json_report['tests']))
-    # Add a key to the report
-    # Delete the summary from the report
     del json_report['summary']
 
 @pytest.hookimpl(optionalhook=True)
@@ -45,3 +43,10 @@ def pytest_json_runtest_metadata(item, call):
         'ram': ram
         }
 
+# def pytest_addoption(parser):
+#     parser.addoption("--name", action="store", default="default name")
+# 
+# def pytest_generate_tests(metafunc):
+#     if "name" in metafunc.fixturenames and option_value is not None:
+#         metafunc.parametrize('name', metafunc.config.getoption("name"))
+# 
