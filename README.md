@@ -1,5 +1,12 @@
-#### 1. Реализовать автоматическое тестирование Blender 3.X.
-   [Blender 3.3]( https://www.blender.org/download/releases/3-3/)   
+### Make programm to run Blender 3.X collect logging and create PNG Images
+
+## How to run
+To run programm Blender must be locally installed, preferebly in `/opt/`  
+cd to programm root and run `python main.py -h` for help,   
+or `python main.py -e [full path to Bleder exe]` (see help) 
+
+## Agenda
+### **Реализовать автоматическое тестирование [Blender 3.X]( https://www.blender.org/download/releases/3-3/)**   
    Необходимо разработать программу, которая будет проверять работу Blender, исполняя
    несколько сценариев. Примеры:
 1. Создание произвольных фигур без материала.
@@ -31,7 +38,7 @@
     
     
     
-#### Реализовать Jenkins Pipeline Job
+### **Реализовать Jenkins Pipeline Job**
    Необходимо реализовать Jenkins Pipeline Job, которая будет принимать параметры из задания 1,
    выполнять сценарии на подключенном узле и сохранять все выходные файлы в качестве
    артефактов.
