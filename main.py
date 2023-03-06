@@ -13,10 +13,10 @@ def main():
         opts, args = getopt.getopt(sys.argv[1:],"ho:e:x:y:")
         for opt, arg in opts:
             if opt == '-h':
-                print ('-e --path to blender executable (required)\n'
+                print ('-e --path to blender executable (required), default = /opt/blender-3.4.1-linux-x64/blender\n'
                 '-o  patch to test result dir, default = ./test_result\n'
-                '-x  result image x resolution, defaut = 0\n'
-                '-y result image y resolution, default = 0')
+                '-x  result image x resolution, defaut = 1024\n'
+                '-y result image y resolution, default = 1024')
                 sys.exit()
             elif opt == "-e":
                 blender_path = arg
@@ -32,6 +32,13 @@ def main():
     except getopt.GetoptError as e:
         print(f'Argument parsing error: {e}')
         sys.exit(1)
+
+    # check if output dir exist if not creare
+    out_p = Path(output_path).resolve()
+    if not out_p.exists():
+        out_p.mkdir(mode=0o760)
+
+
 
     # At first I try to pass args with command line using pytest_generate_tests(metafunc)
     # But it inserts memory location to object. So now use tmp file and 

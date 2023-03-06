@@ -5,7 +5,7 @@ import logging
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from util import create_solar_system, save_to_file, get_args
+from util import *
 
 def add_material(obj, material_name, r, g, b):
     material = bpy.data.materials.get(material_name)
@@ -17,47 +17,50 @@ def add_material(obj, material_name, r, g, b):
         principled_bsdf.inputs[0].default_value = (r, g, b, 1)  
     obj.active_material = material
 
+def color_planets():
+    s = bpy.data.objects['Sun']
+    add_material(s, "Sun", 1, 0.991, 0.163)
+
+    
+    e = bpy.data.objects['Earth']
+    add_material(e, "Earth", 0.201, 0.342, 1)
+
+    v = bpy.data.objects['Venus']
+    add_material(v, "Venus", 1, 0.048, 0.092)
+
+    me = bpy.data.objects['Mercury']
+    add_material(me, "Mercury", 1, 0.297, 0.043)
+
+    ma = bpy.data.objects['Mars']
+    add_material(ma, "Mars", 1, 0.007, 0.062)
+
+
 def main():
     
     p, w, h = get_args()
-    # create logger for this module.
     log_path = p / 'test_material.log'
-    logging.basicConfig(filename=log_path, encoding='utf-8', level=logging.DEBUG)
+    logger = get_logger('test_material', log_path)
+    logger.info('test run')
+    # create logger for this module.
+    # logging.basicConfig(filename=log_path, encoding='utf-8', level=logging.DEBUG)
     
-    # Create stub
+    delete_defaults()
     create_solar_system()
     if not 'Camera' in bpy.data.objects:
-        logging.error(f"Error: no Camera in blender scene")
+        logger.error(f"Error: no Camera in blender scene")
     
     if not 'Earth' in bpy.data.objects:
-        logging.error(f"Error: no Earth in blender scene")
+        logger.error(f"Error: no Earth in blender scene")
 
     # create materials and assign them to spheres
-    s = bpy.data.objects['Sun']
-    add_material(s, "Sun", 255, 255, 153)
-    mat = bpy.data.materials.get("Sun")
-    logging.info("Sun is white")
-    
-    e = bpy.data.objects['Earth']
-    add_material(e, "Earth", 0, 51, 103)
-    logging.info("Earth is blue")
+    color_planets()
 
-    v = bpy.data.objects['Venus']
-    add_material(v, "Venus", 0, 153, 0)
-    logging.info("Venus is green")
-
-    me = bpy.data.objects['Mercury']
-    add_material(me, "Mercury", 0, 0, 0)
-    logging.info("Mercury is black")
-
-    ma = bpy.data.objects['Mars']
-    add_material(ma, "Mars", 204, 0, 0)
-    logging.info("Mars is red")
+    add_light('Light', -14.4, 0, 0)
 
     path = p / 'test_material.png'
     save_to_file(path, w, h)
     if not path.exists:
-        logging.error(f"No result png file at: {path}")
+        logger.error(f"No result png file at: {path}")
     bpy.ops.wm.quit_blender()
 
 main()

@@ -22,32 +22,32 @@ class TestBpy:
     TESTS = path / 'tests'
 
 
-    # def test_simple(self, args):
-    #     """Test Simple Blender Image"""
+    def test_simple(self, args):
+        """Test Simple Blender Image"""
 
-    #     path = self.TESTS / 'test_simple.py'
-    #     
-    #     # Always receive three agrs.
-    #     # get args and pass it to string as a string. Later in test will manipulate with args.
-    #     subprocess.run(
-    #         f"{self.BLENDER} --background\
-    #         --python {path}\
-    #         -- {args[0].strip()} {args[1].strip()} {args[2].strip()}",
-    #         shell = True,
-    #         text = True,
-    #         )
+        path = self.TESTS / 'test_simple.py'
+        
+        # Always receive three agrs.
+        # get args and pass it to string as a string. Later in test will manipulate with args.
+        subprocess.run(
+            f"{self.BLENDER} --background\
+            --python {path}\
+            -- {args[0].strip()} {args[1].strip()} {args[2].strip()}",
+            shell = True,
+            text = True,
+            )
 
-    # def test_material(self, args):
-    #     """Test Blender image with colors"""
+    def test_material(self, args):
+        """Test Blender image with colors"""
 
-    #     path = self.TESTS / 'test_material.py'
-    #     subprocess.run(
-    #         f"{self.BLENDER} --background\
-    #         --python {path}\
-    #         -- {args[0].strip()} {args[1].strip()} {args[2].strip()}",
-    #         shell = True,
-    #         text = True,
-    #         )
+        path = self.TESTS / 'test_material.py'
+        subprocess.run(
+            f"{self.BLENDER} --background\
+            --python {path}\
+            -- {args[0].strip()} {args[1].strip()} {args[2].strip()}",
+            shell = True,
+            text = True,
+            )
 
     def test_light(self, args):
         """Test Lights settings."""
